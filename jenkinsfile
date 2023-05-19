@@ -34,7 +34,7 @@ stage('Docker Build and Tag') {
 
             withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerhubPassword', usernameVariable: 'dockerhubUser')]) {
                     	sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-                      sh 'sudo docker push deeshuec2/abctechapp:latest'
+                      sh "docker push deeshuec2/abctechapp:latest"
           }
           }
         }
