@@ -28,17 +28,16 @@ stage('Docker Build and Tag') {
           }
         }
      
-     stage('DockerHub Login') {
+     stage('DockerHub Login and push image') {
           steps {
-            sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+            //sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+
+            withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerhubPassword', usernameVariable: 'dockerhubUser')]) {
+                    	sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                      sh 'sudo docker push deeshuec2/abctechapp:latest'
           }
         }
-        stage('Publish image to Docker Hub') {
-          steps {
-              sh 'sudo docker push deeshuec2/abctechapp:latest'
-          }
-        }
-     
+
 
  stage('Run Docker on Jenkins') {
              
