@@ -1,0 +1,56 @@
+pipeline {
+    agent any
+
+   tools
+    {
+       maven "Maven"
+    }
+ stages {
+      stage('checkout') {
+           steps {
+
+                git branch: 'main', url: 'https://github.com/divyadevivasudevan/edureka-project-1.git'
+
+          }
+        }
+  stage('Execute Maven') {
+           steps {
+
+                sh 'mvn  clean package'
+                sh 'echo package done'
+                sh  'mv target/*.war target/abctech.war'
+          }
+        }
+
+stage('Docker Build and Tag') {
+           steps {
+              
+                sh 'docker build -t abctechapp:latest .'
+                sh 'docker tag abctechapp deeshuec2/abctechapp:latest'
+
+
+          }
+        }
+     
+     stage('DockerHub Login') {
+          steps {
+            sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+          }
+        }
+        stage('Publish image to Docker Hub') {
+          steps {
+              sh 'sudo docker push deeshuec2/abctechapp:latest'
+          }
+        }
+     
+
+ stage('Run Docker on Jenkins') {
+             
+            steps {
+               // sh "docker -H ssh://jenkins@172.31.28.25 run -d -p 8003:8080 deeshuec2/samplewebapp"
+               sh "docker run -d -p 8003:8080 deeshuec2/abctechapp"
+
+            }
+        }
+    }
+ }
