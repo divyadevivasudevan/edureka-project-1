@@ -36,6 +36,7 @@ stage('Docker Build and Tag') {
                     	sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
                       sh 'sudo docker push deeshuec2/abctechapp:latest'
           }
+          }
         }
 
 
