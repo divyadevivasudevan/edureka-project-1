@@ -1,0 +1,8 @@
+- hosts: all
+  become: true
+  tasks:
+    - name: building docker image
+      command: docker build -t -abctechapp:latest
+
+    - name: creating docker container from image
+      command: docker run -d --name abc-retail-cart -p 8003:8080 abctechapp
