@@ -1,0 +1,6 @@
+curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/OS_DISTRIBUTION/amd64/kubectl
+chmod +x ./kubectl
+sudo mv ./kubectl /usr/bin/kubectl
+
+
+kubectl cluster-info
