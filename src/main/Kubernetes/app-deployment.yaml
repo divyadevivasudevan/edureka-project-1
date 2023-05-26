@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: abctech-deployment
+  labels:
+    app: abctech
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: abctech
+  template:
+    metadata:
+      labels:
+        app: abctech
+    spec:
+      containers:
+        - name: abctech
+          image: deeshuec2/abctechapp:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8090
