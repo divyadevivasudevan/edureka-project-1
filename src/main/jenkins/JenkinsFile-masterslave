@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+
+ stages {
+      stage('checkout') {
+           steps {
+                 agent {label 'js1'}
+                git branch: 'main', url: 'https://github.com/divyadevivasudevan/edureka-project-1.git'
+
+          }
+        }
+  stage('Execute Maven clean') {
+           steps {
+
+                sh 'mvn  clean'
+          }
+        }
+
+stage('Test code') {
+           steps {
+
+                sh 'mvn test verify '
+          }
+        }
+ stage('Package Code') {
+
+            steps {
+            agent {label 'js1'}
+               sh 'mvn package '
+
+            }
+        }
+    }
+ }
+
+
+

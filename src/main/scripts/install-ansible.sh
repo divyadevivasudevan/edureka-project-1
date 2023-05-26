@@ -1,13 +1,3 @@
-#Installing Ansible in ubuntu OS:
-sudo apt-add-repository ppa:ansible/ansible
-sudo apt install python3
-sudo apt update
-sudo apt install ansible
-
-#Check the Ansible version:
-ansible --version
-
-
  sudo su -
 $ useradd ansadmin
 $ passwd ansadmin
@@ -16,8 +6,6 @@ New password:
 Retype new password:
 passwd: all authentication tokens updated successfully.
 
-Deploy on Docker using Ansible & Jenkins
-Posted on September 20, 2020 by Jay Jo
 Prerequisites
 Install Ansible
 Add Ansible Server user
@@ -39,10 +27,7 @@ Using Ansible, push Docker image to Docker Hub.
 Using Jenkins Job, Docker Deploy using Docker Hub
 Manual
 Automation with Jenkins
-Prerequisites
-EC2 Instance
-With Internet Access
-Security Group with Port 8080 open for internet
+
 
 2. Jenkins Server & Target Server.
 
