@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: abctech-service  
+  labels:
+    app: abctech
+spec:
+  type: LoadBalancer
+  ports:
+  - name: http
+    port: 8082
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: abctech
+  sessionAffinity: None

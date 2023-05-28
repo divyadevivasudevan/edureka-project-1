@@ -1,0 +1,14 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Create Production namesapce
+      k8s:
+        name: production
+        api_version: v1
+        kind: Namspace
+        state: present
+    - name: Create new deployment
+      command: kubectl apply -f Deployment.yaml
+    - name: Create new service
+      command: kubectl apply -f Service.yaml
